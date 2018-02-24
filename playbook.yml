@@ -1,0 +1,16 @@
+- hosts: webservers
+  gather_facts: no
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: install webserver
+    apt:
+     name: apache2
+     state: present
+     update_cache: yes
+  - name: copy index page
+    copy:
+     src: myfile.txt
+     dest: /var/www/html/index.html
+
